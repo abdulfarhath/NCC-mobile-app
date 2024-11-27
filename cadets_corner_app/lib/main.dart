@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './study.dart';
 
 void main() {
   runApp(NCCApp());
@@ -98,6 +99,10 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.book),
               title: Text('Study'),
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StudyPage()),
+                );
                 // Navigate to Study page
               },
             ),
