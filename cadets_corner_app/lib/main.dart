@@ -9,7 +9,7 @@ class NCCApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'NCC App',
+      title: 'Cadets Corner',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
     );
@@ -22,11 +22,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> blogs = [
-    "My Experience at RDC Camp",
-    "Tent Pitching Tips for Beginners",
-    "Lessons Learned from TSC",
-    "How Yoga Improved My Focus",
+  final List<Map<String, String>> blogs = [
+    {
+      "title": "My Experience at RDC Camp",
+      "description":
+          "Sharing my unforgettable experiences at the Republic Day Camp...",
+    },
+    {
+      "title": "Tent Pitching Tips for Beginners",
+      "description":
+          "A comprehensive guide to help beginners pitch a tent effectively...",
+    },
+    {
+      "title": "Lessons Learned from TSC",
+      "description":
+          "Important lessons and skills acquired during the Thal Sainik Camp...",
+    },
+    {
+      "title": "How Yoga Improved My Focus",
+      "description":
+          "Exploring the benefits of yoga and how it has enhanced my concentration...",
+    },
   ];
 
   @override
@@ -36,19 +52,29 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text('Cadets Corner'),
             Row(
               children: [
+                IconButton(
+                  icon: Icon(Icons.group),
+                  onPressed: () {
+                    // Navigate to Cadets Corner page
+                  },
+                  tooltip: 'Cadets Corner',
+                ),
                 IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () {
                     // Add search functionality here
                   },
+                  tooltip: 'Search',
                 ),
                 IconButton(
                   icon: Icon(Icons.person),
                   onPressed: () {
                     // Add profile functionality here
                   },
+                  tooltip: 'Profile',
                 ),
               ],
             ),
@@ -64,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             DrawerHeader(
               decoration: BoxDecoration(color: Colors.blue),
               child: Text(
-                'NCC App',
+                'Cadets Corner',
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
@@ -110,6 +136,13 @@ class _HomePageState extends State<HomePage> {
                 // Navigate to Quizzes page
               },
             ),
+            ListTile(
+              leading: Icon(Icons.group),
+              title: Text('Cadets Corner'),
+              onTap: () {
+                // Navigate to Cadets Corner page
+              },
+            ),
           ],
         ),
       ),
@@ -129,11 +162,54 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 8.0),
-                    child: ListTile(
-                      title: Text(blogs[index]),
-                      onTap: () {
-                        // Navigate to blog details
-                      },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            blogs[index]["title"]!,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            blogs[index]["description"]!,
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.thumb_up),
+                                onPressed: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('You liked this post!'),
+                                      duration: Duration(seconds: 1),
+                                    ),
+                                  );
+                                },
+                                tooltip: 'Like',
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.comment),
+                                onPressed: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content:
+                                          Text('Comment feature coming soon!'),
+                                      duration: Duration(seconds: 1),
+                                    ),
+                                  );
+                                },
+                                tooltip: 'Comment',
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },
